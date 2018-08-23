@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan')
 const app = express();
 
-const PORT = 8080;
+const PORT = 80;
 
 function getOS(agent) {
     let OS = 'unknown';
