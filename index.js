@@ -2,9 +2,7 @@ const express = require('express');
 const morgan = require('morgan')
 const app = express();
 
-const IP = '127.0.0.1';
 const PORT = 8080;
-const imgsPath = '/assets/imgs/';
 
 function getOS(agent) {
     let OS = 'unknown';
@@ -22,9 +20,9 @@ function getOS(agent) {
 }
 
 function parseIP(rawIP) {
-    if (IP.substr(0, 7) === "::ffff:") return IP.substr(7);
-    else if(IP.substr(0, 3) === "::1") return '127.0.0.1';
-    else return 'unknown';
+    if (rawIP.substr(0, 7) === "::ffff:") return rawIP.substr(7);
+    else if(rawIP.substr(0, 3) === "::1") return '127.0.0.1';
+    else return 'unknown'; 
 }
 
 function getIP(req) {
@@ -42,8 +40,17 @@ app.use(morgan(':remote-addr :method :url', {
 }));
 app.use('/assets', express.static('assets'));
 
-app.get('/', (req, res) => { res.render('index') });
+app.get('/', (req, res) => { 
+    const userAgnet = req.get('User-Agent');
+    const OS = getOS(userAgnet);
+    const IP = getIP(req);
+
+    res.render('index', {
+        IP: IP,
+        OS: OS
+    });
+});
 
 // Init
-app.listen(PORT, IP);
+app.listen(PORT);
 console.log(`Listening on port ${PORT}`);
