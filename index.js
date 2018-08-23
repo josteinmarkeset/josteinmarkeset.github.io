@@ -12,7 +12,7 @@ function getOS(agent) {
 
     if(agent.includes('linux')) OS = 'Linux';
     else if(agent.includes('windows')) OS = 'Windows';
-    else if(agent.includes('osx')) OS = 'OSX';
+    else if(agent.includes('macintosh')) OS = 'OSX';
 
     console.log(agent);
 
