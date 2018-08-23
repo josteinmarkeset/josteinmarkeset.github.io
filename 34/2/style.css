@@ -1,8 +1,0 @@
-li:not(:last-child) {
-    margin-bottom: 10px;
-}
-
-p {
-    margin-top: 20px;
-    text-align: left;
-}
